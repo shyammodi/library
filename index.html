@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Add New Book</h2>
+    <form action="">
+        <ul>
+            <li>
+                <label for="title">Title*</label>
+                <input type="text" name="title" id="title" required>
+            </li>
+            <li>
+                <label for="author">Author*</label>
+                <input type="text" name="author" id="author" required>
+            </li>
+            <li>
+                <label for="numPages">Number of Pages*</label>
+                <input type="number" name="numPages" id="numPages" required>
+            </li>
+            <li>
+                <label for="haveRead">Have you read this?</label>
+                <input type="checkbox" name="haveRead" id="haveRead">
+            </li>
+        </ul>
+        <button type="submit" id="newBookSubmit">Submit</button>
+    </form>
+    <h2>Library</h2>
+    <ul id="libraryList"></ul>
+
+<script src="javascript2.js"></script>
+</body>
+</html>
