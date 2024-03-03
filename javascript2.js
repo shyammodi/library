@@ -68,15 +68,15 @@ class Library {
 
     openLibrary() {
         const form = document.querySelector("form");
-            form.addEventListener("submit", function(e) {
+            form.addEventListener("submit", (e) => {
                 e.preventDefault();
                 const title = document.querySelector("#title").value;
                 const author = document.querySelector("#author").value;
                 const numPages = document.querySelector("#numPages").value;
                 const haveRead = document.querySelector("#haveRead").checked;
-                lib.addBookToLibrary(new Book(title, author, numPages, haveRead));
+                this.addBookToLibrary(new Book(title, author, numPages, haveRead));
                 form.reset();
-                lib.displayBooks();
+                this.displayBooks();
         })
     }
 
@@ -106,4 +106,4 @@ class Library {
 
 }
 
-let lib = new Library();
+const theLib = new Library();
