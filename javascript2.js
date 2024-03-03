@@ -106,4 +106,4 @@ class Library {
 
 }
 
-const theLib = new Library();
+new Library();
