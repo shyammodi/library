@@ -28,6 +28,7 @@ class Book {
 class Library {
     constructor() {
         this.myLibrary = [];
+        this.openLibrary();
     }
 
     addBookToLibrary(newBook) {
@@ -61,47 +62,48 @@ class Library {
 
             libraryList.appendChild(nextBook);
         }
-        updateToggleReadButtons();
-        updateDeleteButtons();
+        this.updateToggleReadButtons();
+        this.updateDeleteButtons();
+    }
+
+    openLibrary() {
+        const form = document.querySelector("form");
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+                const title = document.querySelector("#title").value;
+                const author = document.querySelector("#author").value;
+                const numPages = document.querySelector("#numPages").value;
+                const haveRead = document.querySelector("#haveRead").checked;
+                lib.addBookToLibrary(new Book(title, author, numPages, haveRead));
+                form.reset();
+                lib.displayBooks();
+        })
+    }
+
+    updateToggleReadButtons() {
+        let toggleReadButtons = Array.from(document.querySelectorAll(".toggle"));
+        toggleReadButtons.forEach(element => {
+            element.addEventListener("click", e => {
+                let bookId = e.target.id.substring(6);
+                this.myLibrary[bookId].toggleRead();
+                this.displayBooks();
+            })
+        });
+    
+    }
+
+    updateDeleteButtons() {
+        let deleteButtons = Array.from(document.querySelectorAll(".delete"));
+        deleteButtons.forEach(element => {
+            element.addEventListener("click", e => {
+                let bookId = e.target.id;
+                this.myLibrary.splice(bookId, 1);
+                this.displayBooks();
+            })
+        });
+    
     }
 
 }
 
-
 let lib = new Library();
-const form = document.querySelector("form");
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    const title = document.querySelector("#title").value;
-    const author = document.querySelector("#author").value;
-    const numPages = document.querySelector("#numPages").value;
-    const haveRead = document.querySelector("#haveRead").checked;
-    lib.addBookToLibrary(new Book(title, author, numPages, haveRead));
-    form.reset();
-    lib.displayBooks();
-})
-
-function updateToggleReadButtons() {
-    let toggleReadButtons = Array.from(document.querySelectorAll(".toggle"));
-    toggleReadButtons.forEach(element => {
-        element.addEventListener("click", e => {
-            let bookId = e.target.id.substring(6);
-            lib.myLibrary[bookId].toggleRead();
-            lib.displayBooks();
-        })
-    });
-
-}
-
-function updateDeleteButtons() {
-    let deleteButtons = Array.from(document.querySelectorAll(".delete"));
-    deleteButtons.forEach(element => {
-        element.addEventListener("click", e => {
-            let bookId = e.target.id;
-            lib.myLibrary.splice(bookId, 1);
-            lib.displayBooks();
-        })
-    });
-
-}
-
